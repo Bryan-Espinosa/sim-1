@@ -5,10 +5,17 @@ import Header from "./component/Header/Header";
 import "./App.css";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inventory: [{ name: "table", price: 5 }, { name: "rug", price: 5 }]
+    };
+  }
+
   render() {
     return (
       <div className="App">
-        <Dashboard />
+        <Dashboard inventory={this.state.inventory} />
         <Form />
         <Header />
       </div>
