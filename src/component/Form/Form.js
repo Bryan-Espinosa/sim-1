@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Axios from "axios";
 
 class Form extends Component {
   constructor(props) {
@@ -12,9 +13,14 @@ class Form extends Component {
   handleInput = e =>
     this.setState({ [e.target.name]: e.target.value }, console.log(this.state));
   handleCancelCLick = e => this.setState({ name: "", price: "", img: "" });
+  handleAddClick = e => {
+    Axios.post("/api/product", { ...this.state })
+      .then(res => this.props.getAll())
+      .then(() => this.handleCancelCLick());
+  };
 
   render() {
-    console.log(this.state);
+    console.log(this.props);
     return (
       <div>
         <div className="form">
@@ -41,7 +47,7 @@ class Form extends Component {
             name="price"
           />
           <button onClick={this.handleCancelCLick}>Cancel</button>
-          <button>Add to Inventory</button>
+          <button onClick={this.handleAddClick}>Add to Inventory</button>
         </div>
       </div>
     );
