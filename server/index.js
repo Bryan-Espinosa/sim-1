@@ -3,7 +3,7 @@ const express = require("express");
 const { json } = require("body-parser");
 const massive = require("massive");
 const PORT = process.env.PORT || 3001;
-const { inventory, addProduct } = require("./controller");
+const { inventory, addProduct, deleteProduct } = require("./controller");
 
 const app = express();
 app.use(json());
@@ -13,4 +13,6 @@ massive(process.env.CONNECTION_STRING).then(dbInstance =>
 
 app.get("/api/inventory", inventory);
 app.post("/api/product", addProduct);
+
+app.delete("/api/delete/:prodid", deleteProduct);
 app.listen(PORT, console.log(`listening on port ${PORT}`));

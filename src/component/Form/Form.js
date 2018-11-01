@@ -7,12 +7,11 @@ class Form extends Component {
     this.state = {
       name: "",
       price: "",
-      img: ""
+      url: ""
     };
   }
-  handleInput = e =>
-    this.setState({ [e.target.name]: e.target.value }, console.log(this.state));
-  handleCancelCLick = e => this.setState({ name: "", price: "", img: "" });
+  handleInput = e => this.setState({ [e.target.name]: e.target.value });
+  handleCancelCLick = e => this.setState({ name: "", price: "", url: "" });
   handleAddClick = e => {
     Axios.post("/api/product", { ...this.state })
       .then(res => this.props.getAll())
@@ -20,16 +19,15 @@ class Form extends Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <div className="form">
-          {/* <img src="" alt=""/> */}
+          {/* <url src="" alt=""/> */}
           Image URL :
           <input
             type="text"
-            value={this.state.img}
-            name="img"
+            value={this.state.url}
+            name="url"
             onChange={this.handleInput}
           />
           ProductName :
